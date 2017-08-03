@@ -1,5 +1,8 @@
 module Chatter
 
-# Package code goes here.
+include("source.jl")
+include("client.jl")
 
-end  # module
+export ChatterClient, start, get!, flush!, send
+
+end
