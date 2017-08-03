@@ -1,6 +1,6 @@
 import Base: send
 
-immutable Source end
+abstract type Source end
 
 # `listen` must be implemented by any subtype of `Source`l.
 # Implementations must `put!` new messages as they are received.

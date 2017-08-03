@@ -8,7 +8,7 @@ Create a new `ChatterClient` from `source`.
 # Arguments
 * `source::Source`: Source of communication.
 """
-immutable ChatterClient
+struct ChatterClient
     messages::Vector{AbstractString}  # Ordered oldest to newest.
     source::Source  # Source of messages.
 
