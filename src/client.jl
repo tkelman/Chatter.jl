@@ -1,4 +1,4 @@
-import Base: start, get!, send
+import Base: start, get!, send, ==
 
 """
     ChatterClient(source::Source) -> ChatterClient
@@ -9,7 +9,7 @@ Create a new `ChatterClient` from `source`.
 * `source::Source`: Source of communication.
 """
 struct ChatterClient
-    messages::Vector{AbstractString}  # Ordered oldest to newest.
+    messages::Vector{Message}  # Ordered oldest to newest.
     source::Source  # Source of messages.
 
     ChatterClient(source::Source) = new(Vector(), source)
@@ -27,7 +27,7 @@ Returns the listener's `Task`.
 """
 function start(client::ChatterClient)
     @async begin
-        channel = Channel{AbstractString}(Inf)
+        channel = Channel{Message}(Inf)
         @async listen(client.source, channel)
         while true
             push!(client.messages, take!(channel))
@@ -36,7 +36,7 @@ function start(client::ChatterClient)
 end
 
 """
-    get!(client::ChatterClient; n=1) -> Vector{AbstractString}
+    get!(client::ChatterClient; n=1) -> Vector{Message}
 
 Get the `n` oldest unread message(s) from `client`.
 
@@ -56,7 +56,7 @@ function get!(client::ChatterClient; n::Int=1)
 end
 
 """
-    flush!(client::ChatterClient) -> Vector{AbstractString}
+    flush!(client::ChatterClient) -> Vector{Message}
 
 Get all unread messages from `client`.
 
@@ -68,12 +68,15 @@ Returns messages, ordered oldest to newest.
 flush!(client::ChatterClient) = get!(client; n=length(client.messages))
 
 """
-    send(client::ChatterClient, msg::AbstractString) -> Void
+    send(client::ChatterClient, msg::AbstractString) -> Int
 
 Send a message to `client`'s source.
 
 # Arguments
-* `client::ChatterClient`: client whose source we're sending to.
+* `client::ChatterClient`: Client whose source we're sending to.
 * `msg::AbstractString`: Message to be sent.
+
+Returns the number of bytes written.
 """
-send(client::ChatterClient, msg::AbstractString) = send(client.source, msg)
+
+==(a::ChatterClient, b::ChatterClient) = a.messages == b.messages && a.source == b.source
