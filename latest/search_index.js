@@ -33,6 +33,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "index.html#Reddit-1",
+    "page": "Home",
+    "title": "Reddit",
+    "category": "section",
+    "text": "julia> using Chatter\n\njulia> client = ChatterClient(Subreddit(\"rarepuppers\"))\nChatter.ChatterClient(Chatter.Message[], Chatter.Subreddit(\"rarepuppers\", \"new\"))\n\njulia> start(client)\nTask (runnable) @0x00007fe850e302b0\n\njulia> get!(client)[1]\nChatter.SubredditMessage(\"Doggo evolution, Peach my puppy\", \"https://redd.it/6rip1o\")"
+},
+
+{
     "location": "pages/client.html#",
     "page": "ChatterClient",
     "title": "ChatterClient",
@@ -137,11 +145,43 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "pages/sources.html#Chatter.IRCMessage",
+    "page": "Sources",
+    "title": "Chatter.IRCMessage",
+    "category": "Type",
+    "text": "IRCMessage(body::AbstractString, author::AbstractString) -> IRCMessage\n\nCreate a new IRC message.\n\nArguments\n\nbody::AbstractString: Message contents.\nauthor::AbstractString: Author of the message.\n\n\n\n"
+},
+
+{
     "location": "pages/sources.html#IRC-1",
     "page": "Sources",
     "title": "IRC",
     "category": "section",
-    "text": "IRC"
+    "text": "IRC\nIRCMessage"
+},
+
+{
+    "location": "pages/sources.html#Chatter.Subreddit",
+    "page": "Sources",
+    "title": "Chatter.Subreddit",
+    "category": "Type",
+    "text": "Subreddit(sub::AbstractString; feed::AbstractString=\"new\")\n\nInitialize a new subreddit source.\n\nArguments\n\nsub::AbstractString: Subreddit to monitor.\n\nKeyword Arguments\n\nfeed::AbstractString=\"new\": Retrieve new posts or hot posts.\n\n\n\n"
+},
+
+{
+    "location": "pages/sources.html#Chatter.SubredditMessage",
+    "page": "Sources",
+    "title": "Chatter.SubredditMessage",
+    "category": "Type",
+    "text": "SubredditMessage(title::AbstractString, link::AbstractString) -> SubredditMessage\n\nCreate a new subreddit message.\n\nArguments\n\ntitle::AbstractString: Title of the post.\nlink::AbstractString: Shortened URL.\n\n\n\n"
+},
+
+{
+    "location": "pages/sources.html#Subreddit-1",
+    "page": "Sources",
+    "title": "Subreddit",
+    "category": "section",
+    "text": "Subreddit\nSubredditMessage"
 },
 
 {
