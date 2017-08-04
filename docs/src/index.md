@@ -30,3 +30,18 @@ julia> get!(client)[1].body  # A new message has arrived.
 julia> send(client, "PRIVMSG #botters-test hello")
 28
 ```
+
+### Reddit
+
+```julia
+julia> using Chatter
+
+julia> client = ChatterClient(Subreddit("rarepuppers"))
+Chatter.ChatterClient(Chatter.Message[], Chatter.Subreddit("rarepuppers", "new"))
+
+julia> start(client)
+Task (runnable) @0x00007fe850e302b0
+
+julia> get!(client)[1]
+Chatter.SubredditMessage("Doggo evolution, Peach my puppy", "https://redd.it/6rip1o")
+```

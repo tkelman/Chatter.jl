@@ -1,4 +1,4 @@
-import Base: start, get!, send, ==
+import Base: start, get!, send
 
 """
     ChatterClient(source::Source) -> ChatterClient
@@ -78,6 +78,4 @@ Send a message to `client`'s source.
 
 Returns the number of bytes written.
 """
-send(client::ChatterClient, msg::AbstractString) = deliver(client.conn, msg)
-
-==(a::ChatterClient, b::ChatterClient) = a.messages == b.messages && a.source == b.source
+send(client::ChatterClient, msg::AbstractString) = deliver(client.source, msg)

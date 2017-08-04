@@ -14,4 +14,12 @@ deliver
 
 ```@docs
 IRC
+IRCMessage
+```
+
+## Subreddit
+
+```@docs
+Subreddit
+SubredditMessage
 ```

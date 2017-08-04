@@ -43,7 +43,7 @@ function listen(source::IRC, channel::Channel{Message})
             write(source.conn, "NICK $(randstring(16))\n")
         elseif !all(isspace, s)
             tokens = map(x -> String(x), split(s, " "; limit=2))
-            put!(channel, Message(tokens[2]; author=tokens[1]))
+            put!(channel, IRCMessage(tokens[2], tokens[1]))
         end
     end
 end
@@ -52,4 +52,22 @@ function deliver(source::IRC, msg::AbstractString)
     # Messages need to follow this specification:
     # https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands
     write(source.conn, endswith(msg, "\n") ? msg : "$msg\n")
+end
+
+"""
+    IRCMessage(body::AbstractString, author::AbstractString) -> IRCMessage
+
+Create a new IRC message.
+
+# Arguments
+* `body::AbstractString`: Message contents.
+* `author::AbstractString`: Author of the message.
+"""
+struct IRCMessage <: Message
+    body::AbstractString
+    author::AbstractString
+
+    function IRCMessage(body::AbstractString, author::AbstractString)
+        new(body, author)
+    end
 end
