@@ -24,8 +24,10 @@ Task (runnable) @0x00007f3efd2b6230
 julia> messages = flush!(client)
 # A bunch of MOTD lines
 
-julia> get!(client)[1].body  # A new message has arrived.
-"PRIVMSG #botters-test :hello github"
+julia> messages = get!(client; n=2)
+2-element Array{Chatter.Message,1}:
+ Chatter.IRCMessage("PRIVMSG #botters-test :Hello", ":averyuniquenickn!8ea07518@gateway/web/freenode/ip.142.160.117.24")
+ Chatter.IRCMessage("PRIVMSG #botters-test :GitHub", ":averyuniquenickn!8ea07518@gateway/web/freenode/ip.142.160.117.24")
 
 julia> send(client, "PRIVMSG #botters-test hello")
 28
