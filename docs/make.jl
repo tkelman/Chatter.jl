@@ -18,6 +18,7 @@ makedocs(
 deploydocs(
     repo="github.com/christopher-dG/Chatter.jl",
     target="build",
+    julia="0.6",
     deps=nothing,
     make=nothing,
 )
