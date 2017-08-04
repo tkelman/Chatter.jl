@@ -39,7 +39,7 @@ function listen(source::IRC, channel::Channel{Message})
         if startswith(s, "PING")
             write(source.conn, "PONG $(String(split(s)[end]))\n")
         elseif contains(s, ":Nickname is already in use.")
-            println("Changing nickname.")
+            info("Nickname is already in use; changing nickname.")
             write(source.conn, "NICK $(randstring(16))\n")
         elseif !all(isspace, s)
             tokens = map(x -> String(x), split(s, " "; limit=2))
@@ -48,8 +48,8 @@ function listen(source::IRC, channel::Channel{Message})
     end
 end
 
-function send(source::IRC, msg::AbstractString)
-    # Messages need to follow the following specification:
+function deliver(source::IRC, msg::AbstractString)
+    # Messages need to follow this specification:
     # https://en.wikipedia.org/wiki/List_of_Internet_Relay_Chat_commands
     write(source.conn, endswith(msg, "\n") ? msg : "$msg\n")
 end

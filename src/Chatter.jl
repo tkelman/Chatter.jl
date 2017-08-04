@@ -5,6 +5,6 @@ include("source.jl")
 include("client.jl")
 include(joinpath("sources", "IRC.jl"))
 
-export ChatterClient, start, get!, flush!, send, IRC
+export ChatterClient, start, get!, flush!, send
 
 end

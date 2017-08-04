@@ -10,7 +10,7 @@ Create a new `ChatterClient` from `source`.
 """
 struct ChatterClient
     messages::Vector{Message}  # Ordered oldest to newest.
-    source::Source  # Source of messages.
+    source::Source  # Source of sending/receiving.
 
     ChatterClient(source::Source) = new(Vector(), source)
 end
@@ -63,7 +63,7 @@ Get all unread messages from `client`.
 # Arguments
 * `client::ChatterClient`: client whose messages are being read.
 
-Returns messages, ordered oldest to newest.
+Returns messages ordered oldest to newest.
 """
 flush!(client::ChatterClient) = get!(client; n=length(client.messages))
 
@@ -78,5 +78,6 @@ Send a message to `client`'s source.
 
 Returns the number of bytes written.
 """
+send(client::ChatterClient, msg::AbstractString) = deliver(client.conn, msg)
 
 ==(a::ChatterClient, b::ChatterClient) = a.messages == b.messages && a.source == b.source
