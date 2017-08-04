@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · Chatter.jl</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link href="assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Chatter.jl</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" action="search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li class="current"><a class="toctext" href="index.html">Home</a><ul class="internal"><li><a class="toctext" href="#Examples-1">Examples</a></li></ul></li><li><a class="toctext" href="pages/client.html">ChatterClient</a></li><li><a class="toctext" href="pages/sources.html">Sources</a></li><li><a class="toctext" href="pages/index.html">Index</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href="index.html">Home</a></li></ul><a class="edit-page" href="https://github.com/christopher-dG/Chatter.jl/blob/4c81e77b8ff0b683c8253d72112056d7c515a5f9/docs/src/index.md#L{line}"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Home</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Chatter-1" href="#Chatter-1">Chatter</a></h1><p><a href="https://christopher-dG.github.io/Chatter.jl/stable"><img src="https://img.shields.io/badge/docs-stable-blue.svg" alt="stable"/></a> <a href="https://christopher-dG.github.io/Chatter.jl/latest"><img src="https://img.shields.io/badge/docs-latest-blue.svg" alt="latest"/></a> <a href="https://travis-ci.org/christopher-dG/Chatter.jl"><img src="https://travis-ci.org/christopher-dG/Chatter.jl.svg?branch=master" alt="Build Status"/></a> <a href="https://ci.appveyor.com/project/christopher-dG/Chatter-jl"><img src="https://ci.appveyor.com/api/projects/status/github/christopher-dG/Chatter.jl?svg=true" alt="Build status"/></a> <a href="https://codecov.io/gh/christopher-dG/Chatter.jl"><img src="https://codecov.io/gh/christopher-dG/Chatter.jl/branch/master/graph/badge.svg" alt="codecov"/></a></p><p><strong>Chatter.jl is a framework(?) for interacting with a variety of messaging platforms.</strong></p><h2><a class="nav-anchor" id="Examples-1" href="#Examples-1">Examples</a></h2><h3><a class="nav-anchor" id="IRC-1" href="#IRC-1">IRC</a></h3><pre><code class="language-julia">julia&gt; using Chatter
+
+julia&gt; client = ChatterClient(IRC(;server=&quot;irc.freenode.net&quot;, channel=&quot;#botters-test&quot;))
+Chatter.ChatterClient(Chatter.Message[], Chatter.IRC(TCPSocket(RawFD(19) open, 0 bytes waiting)))
+
+julia&gt; start(client)
+Task (runnable) @0x00007f3efd2b6230
+
+julia&gt; messages = flush!(client)
+# A bunch of MOTD lines
+
+julia&gt; get!(client)[1].body  # A new message has arrived.
+&quot;PRIVMSG #botters-test :hello github&quot;
+
+julia&gt; send(client, &quot;PRIVMSG #botters-test hello&quot;)
+28</code></pre><h3><a class="nav-anchor" id="Reddit-1" href="#Reddit-1">Reddit</a></h3><pre><code class="language-julia">julia&gt; using Chatter
+
+julia&gt; client = ChatterClient(Subreddit(&quot;rarepuppers&quot;))
+Chatter.ChatterClient(Chatter.Message[], Chatter.Subreddit(&quot;rarepuppers&quot;, &quot;new&quot;))
+
+julia&gt; start(client)
+Task (runnable) @0x00007fe850e302b0
+
+julia&gt; get!(client)[1]
+Chatter.SubredditMessage(&quot;Doggo evolution, Peach my puppy&quot;, &quot;https://redd.it/6rip1o&quot;)</code></pre><footer><hr/><a class="next" href="pages/client.html"><span class="direction">Next</span><span class="title">ChatterClient</span></a></footer></article></body></html>
